@@ -5,21 +5,15 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Paper,
   Typography,
   Pagination,
 } from "@mui/material";
 import OrderItem from "../orderItem/orderItem";
 import { useLocation, useNavigate } from "react-router-dom";
 
-interface Order {
-  id: number;
-  name: string;
-  price: number;
-  status: "pending" | "shipped" | "cancelled";
-}
-
-const orders: Order[] = require("./orders.json");
+import { Order } from "../types/Order";
+import ordersJson from "./orders.json";
+const orders = ordersJson as Order[];
 
 const TableContainer = styled.div`
   padding: 24px;
@@ -47,7 +41,7 @@ export default function OrdersTable() {
 
   return (
     <TableContainer>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6">
         Orders
       </Typography>
       <Table>
