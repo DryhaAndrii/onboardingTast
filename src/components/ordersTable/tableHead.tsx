@@ -1,6 +1,5 @@
 import { TableCell, TableHead, TableRow } from "@mui/material";
 import styled from "styled-components";
-import { Order } from "../../types/Order";
 
 const StyledCell = styled(TableCell)`
   &:hover {
@@ -9,11 +8,7 @@ const StyledCell = styled(TableCell)`
   cursor: pointer;
 `;
 
-interface Props {
-  setPaginatedOrders: React.Dispatch<React.SetStateAction<Order[]>>;
-}
-
-export default function HeadOfTable({ setPaginatedOrders }: Props) {
+export default function HeadOfTable() {
   const tableHeadClickHandler = (headName: string) => {
     console.log(headName);
   };
