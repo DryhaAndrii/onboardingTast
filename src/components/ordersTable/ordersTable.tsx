@@ -7,8 +7,10 @@ import {
   TableBody,
   Paper,
   Typography,
+  Pagination,
 } from "@mui/material";
 import OrderItem from "../orderItem/orderItem";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Order {
   id: number;
@@ -17,19 +19,34 @@ interface Order {
   status: "pending" | "shipped" | "cancelled";
 }
 
-const orders: Order[] = [
-  { id: 1, name: "John Doe", price: 120.5, status: "pending" },
-  { id: 2, name: "Jane Smith", price: 89.99, status: "shipped" },
-  { id: 3, name: "Bob Johnson", price: 45.0, status: "cancelled" },
-];
+const orders: Order[] = require("./orders.json");
 
-const StyledPaper = styled(Paper)`
+const TableContainer = styled.div`
   padding: 24px;
 `;
 
+const PAGE_SIZE = 10;
+
 export default function OrdersTable() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const page = parseInt(
+    new URLSearchParams(location.search).get("page") || "1",
+    10
+  );
+  const totalPages = Math.ceil(orders.length / PAGE_SIZE);
+  const paginatedOrders = orders.slice(
+    (page - 1) * PAGE_SIZE,
+    page * PAGE_SIZE
+  );
+
+  const handlePageChange = (_: any, value: number) => {
+    navigate(`/?page=${value}`);
+  };
+
   return (
-    <StyledPaper elevation={3}>
+    <TableContainer>
       <Typography variant="h6" gutterBottom>
         Orders
       </Typography>
@@ -42,7 +59,7 @@ export default function OrdersTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders.map((order) => (
+          {paginatedOrders.map((order) => (
             <OrderItem
               key={order.id}
               name={order.name}
@@ -52,6 +69,12 @@ export default function OrdersTable() {
           ))}
         </TableBody>
       </Table>
-    </StyledPaper>
+      <Pagination
+        count={totalPages}
+        page={page}
+        onChange={handlePageChange}
+        sx={{ mt: 2, display: "flex", justifyContent: "center" }}
+      />
+    </TableContainer>
   );
 }
