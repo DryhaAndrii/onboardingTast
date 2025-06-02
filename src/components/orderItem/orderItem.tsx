@@ -1,17 +1,20 @@
 import { TableRow, TableCell } from "@mui/material";
+import styled from "styled-components";
+import { Order } from "../../types/Order";
 
-interface OrderItemProps {
-  name: string;
-  price: number;
-  status: "pending" | "shipped" | "cancelled";
-}
+const StyledTableCell = styled(TableCell)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
-export default function OrderItem({ name, price, status }: OrderItemProps) {
+export default function OrderItem({ name, price, status, date }: Order) {
   return (
     <TableRow>
-      <TableCell>{name}</TableCell>
-      <TableCell>${price.toFixed(2)}</TableCell>
-      <TableCell>{status}</TableCell>
+      <StyledTableCell>{date}</StyledTableCell>
+      <StyledTableCell>${price}</StyledTableCell>
+      <StyledTableCell>{name}</StyledTableCell>
+      <StyledTableCell>{status}</StyledTableCell>
     </TableRow>
   );
 }
