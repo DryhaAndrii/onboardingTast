@@ -1,18 +1,10 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+import { RootState } from "../rootReducer";
+import { Order } from "../../types/Order";
 
-// Actions
 export const FETCH_ORDERS_REQUEST = "orders/FETCH_ORDERS_REQUEST";
 export const FETCH_ORDERS_SUCCESS = "orders/FETCH_ORDERS_SUCCESS";
 export const FETCH_ORDERS_FAILURE = "orders/FETCH_ORDERS_FAILURE";
-
-// Types
-interface Order {
-  id: string;
-  name: string;
-  price: number;
-  date: string;
-  status: string;
-}
 
 interface OrdersState {
   data: Order[];
@@ -20,14 +12,12 @@ interface OrdersState {
   error: string | null;
 }
 
-// Initial State
 const initialState: OrdersState = {
   data: [],
   loading: false,
   error: null,
 };
 
-// Reducer
 export default function ordersReducer(
   state = initialState,
   action: any
@@ -44,7 +34,6 @@ export default function ordersReducer(
   }
 }
 
-// Action Creators
 export const fetchOrdersRequest = () => ({ type: FETCH_ORDERS_REQUEST });
 
 export const fetchOrdersSuccess = (orders: Order[]) => ({
@@ -56,7 +45,6 @@ export const fetchOrdersFailure = (error: string) => ({
   payload: error,
 });
 
-// Saga
 async function fetchOrdersApi() {
   const res = await fetch("https://683d69ca199a0039e9e55d2c.mockapi.io/orders");
 
@@ -80,3 +68,6 @@ function* fetchOrdersSaga() {
 export function* ordersSaga() {
   yield takeLatest(FETCH_ORDERS_REQUEST, fetchOrdersSaga);
 }
+
+export const selectOrderById = (id: string) => (state: RootState) =>
+  state.orders.data.find((order) => order.id === id);
