@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import { RootState, useAppDispatch } from "../redux/rootReducer";
-import { fetchOrdersRequest } from "../redux/ducks/orders";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import {
   DataGrid,
   GridColDef,
@@ -11,7 +8,10 @@ import {
   GridPaginationModel,
 } from "@mui/x-data-grid";
 
-export default function OrdersTable() {
+import { RootState, useAppDispatch } from "../redux/rootReducer";
+import { fetchOrdersRequest } from "../redux/ducks/orders";
+
+export function OrdersTable() {
   const dispatch = useAppDispatch();
   const { error, loading, data } = useSelector(
     (state: RootState) => state.orders
@@ -95,7 +95,7 @@ export default function OrdersTable() {
         pageSizeOptions={[5, 10, 20]}
         disableRowSelectionOnClick
         autoHeight
-        onCellClick={cellClickHandler}
+        onRowClick={cellClickHandler}
       />
     </div>
   );

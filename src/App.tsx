@@ -1,8 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import OrdersTable from "./components/ordersTable";
-import OrderInfo from "./components/orderInfo";
-
-
+import { OrderInfo, OrdersTable } from "./components";
 
 function App() {
   return (

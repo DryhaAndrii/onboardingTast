@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { selectOrderById } from "../redux/ducks/orders";
-import { useAppSelector } from "../redux/rootReducer";
+
 import { ContainerOrderInfoStyled } from "../styled/styledOrderInfo";
 
-export default function OrderInfo() {
+import { selectOrderById } from "../redux/ducks/orders";
+import { useAppSelector } from "../redux/rootReducer";
+
+export function OrderInfo() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const order = useAppSelector(selectOrderById(id || ""));
