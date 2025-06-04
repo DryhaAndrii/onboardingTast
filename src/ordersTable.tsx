@@ -1,19 +1,21 @@
+import { useEffect, useState } from "react";
+import { RootState, useAppDispatch } from "./redux/rootReducer";
+import { fetchOrdersRequest } from "./redux/ducks/orders";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import {
   DataGrid,
   GridColDef,
   GridSortModel,
   GridPaginationModel,
 } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../store";
-import { fetchOrdersRequest } from "../../store/orders/actions";
-import { selectOrders, selectLoading } from "../../store/orders/selectors";
-import { useLocation, useNavigate } from "react-router-dom";
 
 export default function OrdersTable() {
   const dispatch = useAppDispatch();
-  const orders = useAppSelector(selectOrders);
-  const loading = useAppSelector(selectLoading);
+  const { error, loading, data } = useSelector(
+    (state: RootState) => state.orders
+  );
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -68,10 +70,14 @@ export default function OrdersTable() {
     { field: "status", headerName: "Status", width: 200 },
   ];
 
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div style={{ padding: 24 }}>
       <DataGrid
-        rows={orders}
+        rows={data}
         columns={columns}
         loading={loading}
         getRowId={(row) => row.id}

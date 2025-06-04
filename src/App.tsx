@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import OrdersTable from "./components/ordersTable/ordersTable";
+import OrdersTable from "./ordersTable";
 
 function App() {
   return (
