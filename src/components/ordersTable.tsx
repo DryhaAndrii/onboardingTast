@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { RootState, useAppDispatch } from "./redux/rootReducer";
-import { fetchOrdersRequest } from "./redux/ducks/orders";
+import { RootState, useAppDispatch } from "../redux/rootReducer";
+import { fetchOrdersRequest } from "../redux/ducks/orders";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -25,6 +25,13 @@ export default function OrdersTable() {
   const sortFieldFromUrl = searchParams.get("sort") || "date";
   const sortDirFromUrl =
     (searchParams.get("sortDir") as "asc" | "desc") || "desc";
+
+  const columns: GridColDef[] = [
+    { field: "date", headerName: "Date", width: 250 },
+    { field: "price", headerName: "Price", width: 200, type: "number" },
+    { field: "name", headerName: "Customer", width: 250 },
+    { field: "status", headerName: "Status", width: 200 },
+  ];
 
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     pageSize: 10,
@@ -63,12 +70,10 @@ export default function OrdersTable() {
     }
   }, [sortModel, navigate, location.search, sortFieldFromUrl, sortDirFromUrl]);
 
-  const columns: GridColDef[] = [
-    { field: "date", headerName: "Date", width: 250 },
-    { field: "price", headerName: "Price", width: 200, type: "number" },
-    { field: "name", headerName: "Customer", width: 250 },
-    { field: "status", headerName: "Status", width: 200 },
-  ];
+  const cellClickHandler = (params: any) => {
+    const { id } = params.row;
+    navigate(`/orderInfo?id=${id}`);
+  };
 
   if (error) {
     return <div>{error}</div>;
@@ -90,6 +95,7 @@ export default function OrdersTable() {
         pageSizeOptions={[5, 10, 20]}
         disableRowSelectionOnClick
         autoHeight
+        onCellClick={cellClickHandler}
       />
     </div>
   );
