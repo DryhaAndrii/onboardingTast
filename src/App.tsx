@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import OrdersTable from "./components/ordersTable/ordersTable";
+import { OrderInfo, OrdersTable } from "./components";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<OrdersTable />} />
+      <Route path="/orderInfo" element={<OrderInfo />} />
     </Routes>
   );
 }

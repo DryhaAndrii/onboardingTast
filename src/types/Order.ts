@@ -1,7 +1,8 @@
 export type Order = {
-  id: number;
+  id: string;
   name: string;
   price: number;
-  status: string;
   date: string;
+  status: string;
+  info: string;
 };
