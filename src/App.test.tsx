@@ -8,7 +8,7 @@ jest.mock("./components", () => ({
   OrderInfo: () => <div>Order Info Mock</div>,
 }));
 
-test("renders OrdersTable on root path", () => {
+test("should render OrdersTable on root path", () => {
   render(
     <MemoryRouter initialEntries={["/"]}>
       <App />
@@ -18,7 +18,7 @@ test("renders OrdersTable on root path", () => {
   expect(screen.getByText(/Orders Table Mock/i)).toBeInTheDocument();
 });
 
-test("renders OrderInfo on /orderInfo path", () => {
+test("should render OrderInfo on /orderInfo path", () => {
   render(
     <MemoryRouter initialEntries={["/orderInfo"]}>
       <App />

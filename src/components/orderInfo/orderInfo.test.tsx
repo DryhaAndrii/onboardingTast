@@ -10,6 +10,7 @@ jest.mock("react-router-dom", () => ({
   __esModule: true,
   useNavigate: jest.fn(),
 }));
+
 jest.mock("../../redux/rootReducer", () => ({
   __esModule: true,
   useAppSelector: jest.fn(),
@@ -30,7 +31,7 @@ const fakeOrder = {
 };
 
 describe("OrderInfo", () => {
-  test("renders user info", () => {
+  test("should render order info", () => {
     window.history.pushState({}, "Test Title", "/test.html?id=123");
 
     (useAppSelector as jest.Mock).mockReturnValue(fakeOrder);
@@ -41,14 +42,16 @@ describe("OrderInfo", () => {
 
     render(<OrderInfo />);
 
-    expect(screen.getByText(/Test Order/i)).toBeInTheDocument();
-    expect(screen.getByText(/10000/i)).toBeInTheDocument();
-    expect(screen.getByText(/2023/i)).toBeInTheDocument();
-    expect(screen.getByText(/Pending/i)).toBeInTheDocument();
-    expect(screen.getByText(/Some info/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Test Order/i) &&
+        screen.getByText(/10000/i) &&
+        screen.getByText(/2023/i) &&
+        screen.getByText(/Pending/i) &&
+        screen.getByText(/Some info/i)
+    ).toBeInTheDocument();
   });
 
-  test("renders 'Order not found' when order is not present", () => {
+  test('should render "Order not found" if order is not found', () => {
     window.history.pushState({}, "Test Title", "/?id=999");
 
     (useAppSelector as jest.Mock).mockReturnValue(undefined);
@@ -57,7 +60,7 @@ describe("OrderInfo", () => {
     expect(screen.getByText(/Order not found/i)).toBeInTheDocument();
   });
 
-  test("navigates to home on button click", () => {
+  test("should navigate to root when 'Go back' button is clicked", () => {
     const mockNavigate = jest.fn();
     (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
 
@@ -69,7 +72,7 @@ describe("OrderInfo", () => {
 });
 
 describe("OrderInfo snapshot", () => {
-  test("matches snapshot", () => {
+  test("should match order info snapshot", () => {
     window.history.pushState({}, "", "/?id=123");
 
     (useNavigate as jest.Mock).mockReturnValue(jest.fn());

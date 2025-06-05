@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OrderTable snapshot matches snapshot 1`] = `
+exports[`OrderTable snapshot should match orders table snapshot 1`] = `
 <DocumentFragment>
   <div
     style="padding: 24px;"

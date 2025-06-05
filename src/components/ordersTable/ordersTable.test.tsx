@@ -60,7 +60,7 @@ const fakeAppSelectorErrorResult = {
 };
 
 describe("OrderInfo", () => {
-  test("renders orders table", () => {
+  test("should render orders", () => {
     (useSelector as unknown as jest.Mock).mockReturnValue(
       fakeAppSelectorResult
     );
@@ -77,20 +77,21 @@ describe("OrderInfo", () => {
 
     render(<OrdersTable />);
 
-    //First order
-    expect(screen.getByText(/Test1 Name1/i)).toBeInTheDocument();
-    expect(screen.getByText(/2023-06-01T12:00:00Z/i)).toBeInTheDocument();
-    expect(screen.getByText(/123/i)).toBeInTheDocument();
-    expect(screen.getByText(/Pending/i)).toBeInTheDocument();
-
-    //Second order
-    expect(screen.getByText(/Test2 Name2/i)).toBeInTheDocument();
-    expect(screen.getByText(/2024-06-02T12:00:00Z/i)).toBeInTheDocument();
-    expect(screen.getByText(/136/i)).toBeInTheDocument();
-    expect(screen.getByText(/Closed/i)).toBeInTheDocument();
+    expect(
+      //First order
+      screen.getByText(/Test1 Name1/i) &&
+        screen.getByText(/2023-06-01T12:00:00Z/i) &&
+        screen.getByText(/123/i) &&
+        screen.getByText(/Pending/i) &&
+        //Second order
+        screen.getByText(/Test2 Name2/i) &&
+        screen.getByText(/2024-06-02T12:00:00Z/i) &&
+        screen.getByText(/136/i) &&
+        screen.getByText(/Closed/i)
+    ).toBeInTheDocument();
   });
 
-  test("renders error", () => {
+  test("should render error message if error", () => {
     (useSelector as unknown as jest.Mock).mockReturnValue(
       fakeAppSelectorErrorResult
     );
@@ -110,7 +111,7 @@ describe("OrderInfo", () => {
     expect(screen.getByText(/Error: Some error/i)).toBeInTheDocument();
   });
 
-  test("Navigate to order info", () => {
+  test("should navigate to order info on click", () => {
     (useSelector as unknown as jest.Mock).mockReturnValue(
       fakeAppSelectorResult
     );
@@ -134,7 +135,7 @@ describe("OrderInfo", () => {
 });
 
 describe("OrderTable snapshot", () => {
-  test("matches snapshot", () => {
+  test("should match orders table snapshot", () => {
     (useSelector as unknown as jest.Mock).mockReturnValue(
       fakeAppSelectorResult
     );

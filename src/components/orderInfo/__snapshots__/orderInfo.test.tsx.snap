@@ -1,9 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OrderInfo snapshot matches snapshot 1`] = `
+exports[`OrderInfo snapshot should match a snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-bXdtCk gPfjft"
+    class="sc-bXdtCk kTETQx"
+  >
+    <div>
+      <p>
+        Client: Test Order
+      </p>
+      <p>
+        Date: 2023/06/01 (15:00)
+      </p>
+      <p>
+        Price: 10000
+      </p>
+      <p>
+        Status: Pending
+      </p>
+      <p>
+        Info: Some info
+      </p>
+      <button>
+        Go back
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`OrderInfo snapshot should match order info snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bXdtCk kTETQx"
   >
     <div>
       <p>
