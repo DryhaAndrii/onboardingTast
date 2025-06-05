@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
-import { ContainerOrderInfoStyled } from "../styled/styledOrderInfo";
+import { ContainerOrderInfoStyled } from "../../styled/orderInfo/styledOrderInfo";
 
-import { selectOrderById } from "../redux/ducks/orders";
-import { useAppSelector } from "../redux/rootReducer";
+import { selectOrderById } from "../../redux/ducks/orders";
+import { useAppSelector } from "../../redux/rootReducer";
 
 export function OrderInfo() {
   const params = new URLSearchParams(window.location.search);
@@ -28,7 +28,7 @@ export function OrderInfo() {
   return (
     <ContainerOrderInfoStyled>
       <div>
-        {order && (
+        {order ? (
           <>
             <p>Client: {order.name}</p>
             <p>Date: {getFormattedDate(order.date)}</p>
@@ -36,6 +36,8 @@ export function OrderInfo() {
             <p>Status: {order.status}</p>
             <p>Info: {order.info}</p>
           </>
+        ) : (
+          <p className="centeredText">Order not found</p>
         )}
 
         <button onClick={buttonHandler}>Go back</button>

@@ -8,8 +8,8 @@ import {
   GridPaginationModel,
 } from "@mui/x-data-grid";
 
-import { RootState, useAppDispatch } from "../redux/rootReducer";
-import { fetchOrdersRequest } from "../redux/ducks/orders";
+import { RootState, useAppDispatch } from "../../redux/rootReducer";
+import { fetchOrdersRequest } from "../../redux/ducks/orders";
 
 export function OrdersTable() {
   const dispatch = useAppDispatch();
@@ -76,7 +76,7 @@ export function OrdersTable() {
   };
 
   if (error) {
-    return <div>{error}</div>;
+    return <div>Error: {error}</div>;
   }
 
   return (
