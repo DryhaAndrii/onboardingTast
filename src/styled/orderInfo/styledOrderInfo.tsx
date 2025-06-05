@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../styledComponentsGlobals";
+import { colors } from "../../styledComponentsGlobals";
 
 export const ContainerOrderInfoStyled = styled.div`
   width: 100%;
@@ -25,7 +25,7 @@ export const ContainerOrderInfoStyled = styled.div`
       padding: 1rem;
       border: none;
       font-weight: bold;
-      font-size:1rem;
+      font-size: 1rem;
       border-radius: 1rem;
       transition: all 0.1s ease-in-out;
       &:hover {
@@ -34,8 +34,11 @@ export const ContainerOrderInfoStyled = styled.div`
         scale: 1.05;
       }
       &:active {
-          scale: 0.95;
+        scale: 0.95;
       }
+    }
+    .centeredText {
+      text-align: center;
     }
   }
 `;
