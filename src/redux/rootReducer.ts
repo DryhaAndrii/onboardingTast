@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import ordersReducer from "./ducks/orders";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+
+import ordersReducer from "./ducks/orders";
 import { ordersSaga } from "./ducks/orders";
 
 const sagaMiddleware = createSagaMiddleware();

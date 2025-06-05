@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { colors } from "../../styledComponentsGlobals";
 
 export const ContainerOrderInfoStyled = styled.div`
@@ -18,7 +19,7 @@ export const ContainerOrderInfoStyled = styled.div`
     border-radius: 1rem;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     p {
-      margin: 0px;
+      margin: 0;
     }
     button {
       font-family: "Roboto", "Helvetica", "Arial", sans-serif;

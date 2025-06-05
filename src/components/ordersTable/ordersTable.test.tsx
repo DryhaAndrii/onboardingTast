@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -108,7 +107,6 @@ describe("OrderInfo", () => {
 
     render(<OrdersTable />);
 
-    //First order
     expect(screen.getByText(/Error: Some error/i)).toBeInTheDocument();
   });
 
